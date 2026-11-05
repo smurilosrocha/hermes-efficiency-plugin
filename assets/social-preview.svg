@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-label="hermes-efficiency-plugin: local usage telemetry for Hermes Agent">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A1020"/>
+      <stop offset="0.55" stop-color="#0D1526"/>
+      <stop offset="1" stop-color="#0A1A22"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2DD4BF"/>
+      <stop offset="1" stop-color="#7DD3FC"/>
+    </linearGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#1B2740" stroke-width="1" opacity="0.55"/>
+    </pattern>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="18" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+  <rect width="1280" height="640" fill="url(#grid)"/>
+  <circle cx="1090" cy="120" r="210" fill="#0F2C33" opacity="0.55" filter="url(#soft)"/>
+  <circle cx="120" cy="600" r="180" fill="#101B33" opacity="0.7" filter="url(#soft)"/>
+
+  <g font-family="DejaVu Sans Mono, ui-monospace, monospace" fill="#E6EDF7">
+    <text x="72" y="96" font-size="14" letter-spacing="4" fill="#5EEAD4">HERMES AGENT · PLUGIN</text>
+
+    <text x="72" y="164" font-size="40" font-weight="bold" fill="#F8FAFC">hermes-efficiency-plugin</text>
+    <text x="72" y="208" font-size="20" fill="#A9B6CC">Local usage telemetry for Hermes Agent.</text>
+    <text x="72" y="238" font-size="20" fill="#7C8BA5">Tokens, cache, latency and errors in a file you own.</text>
+
+    <g font-size="15">
+      <rect x="72" y="282" width="178" height="40" rx="20" fill="#0F2C33" stroke="#1F4A4A"/>
+      <text x="94" y="308" fill="#5EEAD4">no network</text>
+
+      <rect x="266" y="282" width="206" height="40" rx="20" fill="#101B33" stroke="#22345A"/>
+      <text x="288" y="308" fill="#93C5FD">no prompt text</text>
+
+      <rect x="488" y="282" width="188" height="40" rx="20" fill="#1A1730" stroke="#3B2E63"/>
+      <text x="510" y="308" fill="#C4B5FD">stdlib only</text>
+    </g>
+
+    <g font-size="15">
+      <rect x="72" y="356" width="556" height="182" rx="14" fill="#0B1524" stroke="#1E2C46"/>
+      <text x="94" y="388" font-size="13" letter-spacing="2" fill="#64748B">LEDGER · 0600 · APPEND-ONLY</text>
+      <text x="94" y="422" fill="#94A3B8">&lt;hermes-root&gt;/eficiencia/calls/2026-11-05.jsonl</text>
+      <text x="94" y="460" fill="#5EEAD4" font-size="13">{"ts":1762345678.1,"model":"gpt-6.1-sol",</text>
+      <text x="94" y="486" fill="#5EEAD4" font-size="13">"usage":{"input_tokens":135,"output_tokens":698,</text>
+      <text x="94" y="512" fill="#5EEAD4" font-size="13">"cache_read_tokens":242816},"dur":4.487,"err":0}</text>
+    </g>
+
+    <text x="72" y="596" font-size="14" fill="#4B5A73">github.com/smurilosrocha/hermes-efficiency-plugin</text>
+    <text x="1208" y="596" font-size="14" text-anchor="end" fill="#334155">MIT</text>
+  </g>
+
+  <!-- flow -->
+  <g font-family="DejaVu Sans Mono, ui-monospace, monospace">
+    <rect x="716" y="120" width="492" height="452" rx="18" fill="#0A1322" stroke="#1B2A44"/>
+    <text x="746" y="156" font-size="13" letter-spacing="2" fill="#64748B">HOW IT FLOWS</text>
+
+    <!-- hooks -->
+    <g>
+      <rect x="746" y="180" width="196" height="112" rx="12" fill="#0F1B2E" stroke="#2A3D5C"/>
+      <text x="762" y="206" font-size="13" fill="#93C5FD">Hermes call</text>
+      <text x="762" y="232" font-size="11" fill="#7C8BA5">api_request × 3</text>
+      <text x="762" y="252" font-size="11" fill="#7C8BA5">post_tool_call</text>
+      <text x="762" y="272" font-size="11" fill="#7C8BA5">post_auxiliary_call</text>
+    </g>
+
+    <path d="M942 236 H982" stroke="#2DD4BF" stroke-width="2" marker-end="url(#a)"/>
+    <defs>
+      <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+        <path d="M0 0 L10 5 L0 10 z" fill="#2DD4BF"/>
+      </marker>
+    </defs>
+
+    <!-- observer -->
+    <rect x="986" y="180" width="196" height="112" rx="12" fill="#0C2A2C" stroke="#1F5A57"/>
+    <text x="1002" y="206" font-size="13" fill="#5EEAD4">Observer</text>
+    <text x="1002" y="232" font-size="11" fill="#8FB7B4">in-process, wrapped</text>
+    <text x="1002" y="252" font-size="11" fill="#8FB7B4">HMAC fingerprints</text>
+    <text x="1002" y="272" font-size="11" fill="#8FB7B4">256 pending max</text>
+
+    <path d="M1084 292 V324" stroke="#2DD4BF" stroke-width="2" marker-end="url(#a)"/>
+
+    <!-- files -->
+    <g>
+      <rect x="986" y="330" width="196" height="96" rx="12" fill="#0F1B2E" stroke="#2A3D5C"/>
+      <text x="1002" y="356" font-size="12" fill="#93C5FD">calls/&lt;day&gt;.jsonl</text>
+      <text x="1002" y="378" font-size="12" fill="#93C5FD">tools/&lt;day&gt;.jsonl</text>
+      <text x="1002" y="400" font-size="12" fill="#93C5FD">aux/&lt;day&gt;.jsonl</text>
+      <text x="1002" y="420" font-size="11" fill="#64748B">0600 · O_NOFOLLOW</text>
+    </g>
+
+    <path d="M986 378 H946" stroke="#2DD4BF" stroke-width="2" marker-end="url(#a)"/>
+
+    <!-- report -->
+    <rect x="746" y="330" width="196" height="96" rx="12" fill="#1A1730" stroke="#3B2E63"/>
+    <text x="762" y="356" font-size="12" fill="#C4B5FD">tools/report.py</text>
+    <text x="762" y="380" font-size="11" fill="#8B84B8">calls · tokens · cache</text>
+    <text x="762" y="400" font-size="11" fill="#8B84B8">p50 / p95 · errors</text>
+    <text x="762" y="420" font-size="11" fill="#5B5580">--json</text>
+
+    <!-- never stored -->
+    <rect x="746" y="450" width="436" height="96" rx="12" fill="#1B1116" stroke="#4C2230"/>
+    <text x="762" y="476" font-size="12" fill="#FCA5A5">never written to disk</text>
+    <text x="762" y="500" font-size="11" fill="#B98A94">prompt and message text · tool arguments</text>
+    <text x="762" y="520" font-size="11" fill="#B98A94">tool output and model output · credentials</text>
+    <text x="762" y="540" font-size="11" fill="#8A5F6B">the request is hashed, not copied</text>
+  </g>
+</svg>

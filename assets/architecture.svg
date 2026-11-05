@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820" role="img" aria-label="Architecture: Hermes hooks feed an in-process observer that appends JSONL files, which a CLI report reads">
+  <defs>
+    <linearGradient id="bg2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0A1020"/>
+      <stop offset="1" stop-color="#0B1A22"/>
+    </linearGradient>
+    <pattern id="grid2" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M28 0H0V28" fill="none" stroke="#182338" stroke-width="1"/>
+    </pattern>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#2DD4BF"/>
+    </marker>
+    <marker id="ar2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto">
+      <path d="M0 0 L10 5 L0 10 z" fill="#94A3B8"/>
+    </marker>
+  </defs>
+
+  <rect width="1400" height="820" fill="url(#bg2)"/>
+  <rect width="1400" height="820" fill="url(#grid2)"/>
+
+  <g font-family="DejaVu Sans Mono, ui-monospace, monospace">
+    <text x="64" y="70" font-size="13" letter-spacing="3" fill="#5EEAD4">ARCHITECTURE</text>
+    <text x="64" y="112" font-size="30" font-weight="bold" fill="#F1F5F9">One process, one file, no network</text>
+    <text x="64" y="146" font-size="15" fill="#7C8BA5">The observer runs inside the Hermes process that makes the call. Nothing leaves the machine.</text>
+
+    <!-- column 1: hooks -->
+    <rect x="64" y="190" width="330" height="300" rx="16" fill="#0E1A2C" stroke="#26395A"/>
+    <text x="88" y="222" font-size="14" fill="#93C5FD">Hermes · hooks</text>
+    <g font-size="12.5" fill="#8FA3BF">
+      <text x="88" y="258">pre_api_request</text>
+      <text x="88" y="284">post_api_request</text>
+      <text x="88" y="310">api_request_error</text>
+      <text x="88" y="336">post_tool_call</text>
+      <text x="88" y="362">post_auxiliary_call</text>
+    </g>
+    <line x1="88" y1="386" x2="370" y2="386" stroke="#22304A"/>
+    <g font-size="12" fill="#64748B">
+      <text x="88" y="414">read-only: the request and the response</text>
+      <text x="88" y="434">are not modified by the observer</text>
+      <text x="88" y="462" fill="#B98A94">never stored: prompt, messages,</text>
+      <text x="88" y="480" fill="#B98A94">tool arguments, tool output</text>
+    </g>
+
+    <path d="M394 340 H462" stroke="#2DD4BF" stroke-width="2" marker-end="url(#ar)"/>
+
+    <!-- column 2: observer -->
+    <rect x="470" y="190" width="360" height="300" rx="16" fill="#0B2A2B" stroke="#1E5A56"/>
+    <text x="494" y="222" font-size="14" fill="#5EEAD4">Observer · __init__.py</text>
+    <g font-size="12.5" fill="#9DC3C0">
+      <text x="494" y="258">merge request + response halves</text>
+      <text x="494" y="284">HMAC-SHA256 fingerprints</text>
+      <text x="494" y="310">byte counts per section</text>
+      <text x="494" y="336">token counters from the provider</text>
+      <text x="494" y="362">try/except around every hook</text>
+    </g>
+    <line x1="494" y1="386" x2="806" y2="386" stroke="#1B4A47"/>
+    <g font-size="12" fill="#6E9A96">
+      <text x="494" y="414">pending queue: 256 max, overflow written</text>
+      <text x="494" y="434">with "incomplete": 1</text>
+      <text x="494" y="462" fill="#7FB3AE">a failure here cannot fail the call</text>
+    </g>
+
+    <path d="M830 340 H898" stroke="#2DD4BF" stroke-width="2" marker-end="url(#ar)"/>
+
+    <!-- column 3: files -->
+    <rect x="906" y="190" width="330" height="300" rx="16" fill="#0F1B2E" stroke="#2A3D5C"/>
+    <text x="930" y="222" font-size="14" fill="#93C5FD">Ledger · 0600 · append-only</text>
+    <g font-size="12.5" fill="#8FA3BF">
+      <text x="930" y="262">calls/&lt;YYYY-MM-DD&gt;.jsonl</text>
+      <text x="930" y="292">tools/&lt;YYYY-MM-DD&gt;.jsonl</text>
+      <text x="930" y="322">aux/&lt;YYYY-MM-DD&gt;.jsonl</text>
+    </g>
+    <line x1="930" y1="348" x2="1212" y2="348" stroke="#22304A"/>
+    <g font-size="12" fill="#64748B">
+      <text x="930" y="376">O_NOFOLLOW on open</text>
+      <text x="930" y="396">fchmod 0600 on every write</text>
+      <text x="930" y="416">one O_APPEND write per line</text>
+      <text x="930" y="444" fill="#8FA3BF">hmac.key · 0600</text>
+      <text x="930" y="464" fill="#64748B">32 random bytes, first use</text>
+    </g>
+
+    <!-- consumer lane -->
+    <path d="M1071 490 V528 H760" stroke="#94A3B8" stroke-width="2" fill="none" marker-end="url(#ar2)"/>
+    <rect x="470" y="528" width="290" height="120" rx="14" fill="#1A1730" stroke="#3B2E63"/>
+    <text x="492" y="560" font-size="13" fill="#C4B5FD">tools/report.py</text>
+    <g font-size="12" fill="#9C93C7">
+      <text x="492" y="586">tokens · cache · latency · errors</text>
+      <text x="492" y="608">by day, model and provider</text>
+      <text x="492" y="630" fill="#6F689B">stdlib only · --json</text>
+    </g>
+
+    <path d="M760 588 H828" stroke="#94A3B8" stroke-width="2" marker-end="url(#ar2)"/>
+    <rect x="836" y="528" width="400" height="120" rx="14" fill="#0E1A2C" stroke="#26395A"/>
+    <text x="858" y="558" font-size="12.5" fill="#8FA3BF">by model · example output</text>
+    <g font-size="12" fill="#5EEAD4">
+      <text x="858" y="586">claude-sonnet-5-5   2765   4.4M   63%</text>
+      <text x="858" y="608">gpt-6.1-sol         2346   1.4M   20%</text>
+      <text x="858" y="630">deepseek-flash      1289   749k   11%</text>
+    </g>
+
+    <!-- contract strip -->
+    <rect x="64" y="706" width="1172" height="70" rx="12" fill="#0C1526" stroke="#1E2C46"/>
+    <g font-size="12" fill="#64748B">
+      <text x="88" y="734">CONTRACT</text>
+      <text x="88" y="758" fill="#8FA3BF">append-only JSONL · unknown fields ignored · schema markers v / v2 · no rotation by the plugin</text>
+    </g>
+    <text x="1208" y="758" font-size="12" fill="#334155" text-anchor="end">MIT</text>
+  </g>
+</svg>

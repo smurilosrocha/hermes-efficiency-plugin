@@ -1,0 +1,22 @@
+name: eficiencia
+version: "0.4.0"
+description: "Local, dependency-free usage telemetry for Hermes: one JSON line per model call, tool call and auxiliary call, with HMAC fingerprints instead of prompt text. Ships a CLI report; no network, no vendor service."
+author: "Murilo Rocha"
+license: "MIT"
+homepage: "https://github.com/smurilosrocha/hermes-efficiency-plugin"
+requires_hermes: ">=0.21.7"
+tags:
+  - telemetry
+  - tokens
+  - cost
+  - local-first
+  - hooks
+provides_hooks:
+  - pre_api_request
+  - post_api_request
+  - api_request_error
+  - post_tool_call
+  - post_auxiliary_call
+optional_env:
+  - EFICIENCIA_OFF
+  - EFICIENCIA_ROOT
