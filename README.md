@@ -83,6 +83,13 @@ reference consumer, not the only possible one: the JSONL schema is documented in
 [docs/DATA-FORMAT.md](docs/DATA-FORMAT.md), so a dashboard, a spreadsheet or a billing check can read the same
 files.
 
+## Disclosure
+
+Installing and enabling the plugin is the consent step: from then on, **every** model, tool and auxiliary call
+on this machine is recorded locally, including the profile name, session id and task id in clear. Nothing is sent
+anywhere and no prompt or tool text is stored, but the ledger is a record of what the machine did and when — see
+[docs/PRIVACY.md](docs/PRIVACY.md). Collection stops with `hermes plugins disable eficiencia` or `EFICIENCIA_OFF=1`.
+
 ## Where the data goes, and how to stop it
 
 - Ledger: `<hermes-root>/eficiencia/calls|tools|aux/<day>.jsonl`, mode `0600`, directory `0700`. The root is
